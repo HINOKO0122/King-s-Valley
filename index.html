@@ -45,8 +45,8 @@
         /* 盤面 & タイルスタイル */
         .board-container {
             aspect-ratio: 1 / 1;
-            height: min(52vh, 460px);
-            max-width: 92vw;
+            height: min(50vh, 440px);
+            max-width: 90vw;
         }
 
         .board-grid {
@@ -186,8 +186,8 @@
 <body class="flex flex-col items-center justify-between p-2 sm:p-4 h-screen overflow-hidden">
 
     <!-- ヘッダー -->
-    <header class="w-full max-w-xl flex items-center justify-between glass-panel p-2.5 sm:p-3 rounded-xl shrink-0">
-        <div class="flex items-center gap-2.5">
+    <header class="w-full max-w-xl flex items-center justify-between glass-panel p-2 sm:p-3 rounded-xl shrink-0">
+        <div class="flex items-center gap-2">
             <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-amber-400 to-amber-700 flex items-center justify-center text-slate-950 font-bold text-base sm:text-lg shadow">
                 <i class="fa-solid fa-chess-king"></i>
             </div>
@@ -207,10 +207,10 @@
     </header>
 
     <!-- メインコンテンツ -->
-    <main class="w-full max-w-xl flex flex-col items-center justify-center gap-2 sm:gap-3 my-auto flex-1 py-1">
+    <main class="w-full max-w-xl flex flex-col items-center justify-center gap-2 my-auto flex-1 py-1">
 
         <!-- 設定 & ステータスバー -->
-        <div class="w-full glass-panel rounded-xl p-2.5 sm:p-3 flex flex-col gap-2 shrink-0">
+        <div class="w-full glass-panel rounded-xl p-2 sm:p-2.5 flex flex-col gap-1.5 shrink-0">
             <!-- 設定選択 (モード・難易度・ルール) -->
             <div class="grid grid-cols-3 gap-1.5 text-xs">
                 <!-- 対戦モード -->
@@ -237,21 +237,21 @@
                 <div class="flex flex-col gap-0.5">
                     <label class="text-slate-400 text-[10px] font-semibold uppercase tracking-wider">ルール</label>
                     <select id="ruleSelect" class="bg-slate-900/90 border border-amber-500/30 rounded px-1.5 py-1 text-amber-200 focus:outline-none focus:border-amber-400 text-xs">
-                        <option value="standard" selected>スタンダード</option>
+                        <option value="simple" selected>簡易版</option>
+                        <option value="standard">スタンダード</option>
                         <option value="rescue">王の奪還</option>
-                        <option value="simple">簡易版</option>
                     </select>
                 </div>
             </div>
 
             <!-- ターン表示 & 情報 -->
-            <div class="flex items-center justify-between pt-1.5 border-t border-slate-700/50">
+            <div class="flex items-center justify-between pt-1 border-t border-slate-700/50">
                 <div class="flex items-center gap-1.5">
-                    <div id="turnBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold flex items-center gap-1.5 transition-colors">
+                    <div id="turnBadge" class="px-2 py-0.5 rounded-full text-xs font-bold flex items-center gap-1.5 transition-colors">
                         <span id="turnIndicatorDot" class="w-2 h-2 rounded-full animate-pulse"></span>
                         <span id="turnText">Player 1 の番</span>
                     </div>
-                    <span id="firstMoveRestrictionNotice" class="text-[10px] text-amber-400/90 bg-amber-950/60 border border-amber-600/40 px-1.5 py-0.5 rounded">
+                    <span id="firstMoveRestrictionNotice" class="text-[10px] text-amber-400/90 bg-amber-950/60 border border-amber-600/40 px-1.5 py-0.5 rounded hidden">
                         初手家臣限定
                     </span>
                 </div>
@@ -278,7 +278,7 @@
     </main>
 
     <!-- フッター -->
-    <footer class="w-full max-w-xl text-center py-1 text-[10px] text-slate-500 shrink-0">
+    <footer class="w-full max-w-xl text-center py-0.5 text-[10px] text-slate-500 shrink-0">
         <p>King's Valley Game Concept © Mitsuo Yamamoto & Gift Box Co.,Ltd.</p>
     </footer>
 
@@ -295,16 +295,16 @@
             </div>
 
             <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
-                <!-- 簡易版ルール説明（新規追加） -->
+                <!-- 簡易版ルール説明（追加） -->
                 <section class="bg-amber-950/40 p-3 rounded-lg border border-amber-500/40">
                     <h3 class="text-amber-300 font-bold mb-1 flex items-center gap-1.5 text-sm">
                         <i class="fa-solid fa-bolt"></i> 簡易版ルール（おすすめ・初心者向け）
                     </h3>
                     <ul class="list-disc list-inside space-y-1 text-slate-200">
                         <li><strong>王様の初手移動:</strong> 1手目から王様を動かすことができます。</li>
-                        <li><strong>家臣の移動方向:</strong> <span class="text-amber-300 font-semibold">上下左右のみ</span>移動可能です（斜め移動はできません）。※王様は全8方向に移動可能。</li>
-                        <li><strong>中央タイルの通行:</strong> 家臣駒は中央タイルを通過でき、障害物（盤の端や他駒）で直進が止まる場合は中央タイル上にとどまることもできます。</li>
-                        <li><strong>勝利条件:</strong> <span class="text-amber-300 font-semibold">どちらかの王様が中央タイルに乗ったときのみ</span>ゲーム終了です（家臣が中央に乗ってもゲームは続きます）。</li>
+                        <li><strong>移動方向:</strong> 家臣も王様も<span class="text-amber-300 font-semibold">上下左右のみ</span>移動可能です（斜め移動不可）。</li>
+                        <li><strong>中央タイルの通行:</strong> 家臣駒は中央タイルを通過でき、障害物で直進が止まる場合は中央タイル上にとどまることもできます。</li>
+                        <li><strong>勝利条件:</strong> <span class="text-amber-300 font-semibold">どちらかの王様が中央タイルに乗ったときのみ</span>勝利です（家臣が中央に乗ってもゲームは続きます）。</li>
                     </ul>
                 </section>
 
@@ -315,7 +315,7 @@
                     </h3>
                     <ul class="list-disc list-inside space-y-1 text-slate-300">
                         <li><strong>勝利条件:</strong> 自分の王様駒を中央タイルに到達させると勝利。</li>
-                        <li><strong>全駒8方向移動:</strong> 駒は障害物に当たるまで一気に直進。</li>
+                        <li><strong>全駒8方向移動:</strong> 駒は上下左右・斜めの8方向に障害物に当たるまで一気に直進。</li>
                         <li><strong>初手の制限:</strong> 先手の第1手目は家臣駒のみ動かせます。</li>
                         <li><strong>中央制限:</strong> 中央タイルには<span class="text-amber-300">王様駒しか入れません</span>（家臣は進入・通過不可）。</li>
                     </ul>
@@ -463,7 +463,7 @@
                 
                 this.mode = 'ai';
                 this.difficulty = 'normal';
-                this.rule = 'standard'; // 'standard', 'rescue', 'simple'
+                this.rule = 'simple'; // デフォルトを簡易版に設定
                 
                 this.history = [];
                 this.positionHistory = {};
@@ -557,7 +557,7 @@
                         break;
                     }
 
-                    // 2. King's Valley (2,2) 進入制限（簡易版では家臣も入ることができる）
+                    // 2. King's Valley (2,2) 進入制限
                     if (nextR === 2 && nextC === 2) {
                         if (this.rule !== 'simple' && piece.type === 'minion') {
                             // スタンダード/奪還ルールでは家臣駒は中央に入れない・通過不可
@@ -589,9 +589,10 @@
                 }
 
                 // 移動可能な方向の選定
-                // 簡易版の場合: 家臣は上下左右の4方向、王は8方向。スタンダード/奪還: 全駒8方向
+                // 簡易版: 上下左右のみ (家臣も王様も4方向)
+                // スタンダード / 奪還: 全駒8方向
                 let availableDirections = this.directions8;
-                if (this.rule === 'simple' && piece.type === 'minion') {
+                if (this.rule === 'simple') {
                     availableDirections = this.directions4;
                 }
 
