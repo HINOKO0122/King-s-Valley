@@ -19,8 +19,8 @@
             background: radial-gradient(circle at center, #1e1b2e 0%, #0d0b14 100%);
             color: #f1f5f9;
             height: 100vh;
-            height: 100dvh; /* 動的ビューポート対応 */
-            overflow: hidden; /* スクロール完全禁止 */
+            height: 100dvh;
+            overflow: hidden;
         }
 
         .font-cinzel {
@@ -32,41 +32,39 @@
             background: rgba(30, 27, 46, 0.75);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(212, 175, 55, 0.25);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         .glass-modal {
             background: rgba(15, 12, 25, 0.95);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(212, 175, 55, 0.35);
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
 
-        /* 盤面 & タイルスタイル (画面サイズに応じて動的に縮小) */
+        /* 盤面 & タイルスタイル */
         .board-container {
             aspect-ratio: 1 / 1;
-            max-height: min(52vh, 480px);
-            max-width: min(52vh, 480px);
-            width: 100%;
-            margin: 0 auto;
+            height: min(52vh, 460px);
+            max-width: 92vw;
         }
 
         .board-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             grid-template-rows: repeat(5, 1fr);
-            gap: min(1.2vh, 6px);
-            padding: min(1.5vh, 10px);
+            gap: 4px;
+            padding: 8px;
             background: linear-gradient(135deg, #2a2438 0%, #171523 100%);
-            border: min(0.4vh, 3px) solid #d4af37;
-            border-radius: min(2vh, 16px);
-            box-shadow: 0 0 min(3vh, 25px) rgba(212, 175, 55, 0.25), inset 0 0 15px rgba(0,0,0,0.8);
+            border: 3px solid #d4af37;
+            border-radius: 14px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.25), inset 0 0 15px rgba(0,0,0,0.8);
             position: relative;
         }
 
         .tile {
             position: relative;
-            border-radius: min(1.2vh, 8px);
+            border-radius: 6px;
             background: linear-gradient(145deg, #322b42, #231e30);
             box-shadow: inset 0 1px 2px rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.4);
             transition: all 0.2s ease;
@@ -83,8 +81,8 @@
         /* 中央 King's Valley タイル */
         .tile-valley {
             background: radial-gradient(circle, #7a5c12 0%, #3a2a07 100%) !important;
-            border: min(0.3vh, 2px) solid #f39c12;
-            box-shadow: inset 0 0 12px rgba(243, 156, 18, 0.6), 0 0 15px rgba(243, 156, 18, 0.4) !important;
+            border: 2px solid #f39c12;
+            box-shadow: inset 0 0 10px rgba(243, 156, 18, 0.6), 0 0 12px rgba(243, 156, 18, 0.4) !important;
             animation: pulse-valley 3s infinite alternate;
         }
 
@@ -99,28 +97,32 @@
             height: 32%;
             background-color: #f39c12;
             border-radius: 50%;
-            box-shadow: 0 0 10px #f39c12, 0 0 18px #f1c40f;
+            box-shadow: 0 0 10px #f39c12, 0 0 16px #f1c40f;
             animation: ping-slow 1.2s infinite ease-in-out;
             pointer-events: none;
         }
 
         @keyframes ping-slow {
-            0%, 100% { transform: scale(0.85); opacity: 0.85; }
+            0%, 100% { transform: scale(0.85); opacity: 0.8; }
             50% { transform: scale(1.15); opacity: 1; }
         }
 
         /* 駒スタイル */
         .piece {
-            width: 82%;
-            height: 82%;
+            width: 80%;
+            height: 80%;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: min(3vh, 1.4rem);
+            font-size: 1.2rem;
             z-index: 10;
-            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+            transition: transform 0.2s ease, box-shadow 0.2s;
             user-select: none;
+        }
+
+        @media (min-height: 700px) {
+            .piece { font-size: 1.6rem; }
         }
 
         /* プレイヤー1 (Gold / Sun) */
@@ -128,7 +130,7 @@
             background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
             color: #4a2800;
             border: 2px solid #fff5cc;
-            box-shadow: 0 4px 8px rgba(246, 211, 101, 0.4), inset 0 2px 4px rgba(255,255,255,0.8);
+            box-shadow: 0 3px 8px rgba(246, 211, 101, 0.5), inset 0 2px 4px rgba(255,255,255,0.8);
         }
 
         /* プレイヤー2 (Blue / Shadow) */
@@ -136,22 +138,26 @@
             background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
             color: #002244;
             border: 2px solid #b3ecff;
-            box-shadow: 0 4px 8px rgba(0, 198, 255, 0.4), inset 0 2px 4px rgba(255,255,255,0.8);
+            box-shadow: 0 3px 8px rgba(0, 198, 255, 0.5), inset 0 2px 4px rgba(255,255,255,0.8);
         }
 
         .piece-king {
-            font-size: min(3.8vh, 1.8rem);
-            filter: drop-shadow(0 0 3px rgba(255,255,255,0.6));
+            font-size: 1.4rem;
+            filter: drop-shadow(0 0 4px rgba(255,255,255,0.6));
+        }
+
+        @media (min-height: 700px) {
+            .piece-king { font-size: 1.9rem; }
         }
 
         .piece.selected {
-            transform: scale(1.15);
-            box-shadow: 0 0 18px #ffffff, 0 0 10px #f39c12;
+            transform: scale(1.12);
+            box-shadow: 0 0 16px #ffffff, 0 0 8px #f39c12;
             border-color: #ffffff;
             z-index: 20;
         }
 
-        /* ボタン */
+        /* カスタムボタン効果 */
         .btn-gold {
             background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
             color: #1a1300;
@@ -162,7 +168,7 @@
 
         .btn-gold:hover {
             background: linear-gradient(135deg, #e5be48 0%, #bb8d22 100%);
-            box-shadow: 0 6px 14px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 5px 14px rgba(212, 175, 55, 0.5);
         }
 
         .btn-dark {
@@ -175,164 +181,160 @@
             background: rgba(255, 255, 255, 0.15);
             border-color: rgba(212, 175, 55, 0.5);
         }
-
-        /* モーダル用スクロールバー */
-        .modal-scroll::-webkit-scrollbar {
-            width: 5px;
-        }
-        .modal-scroll::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-        }
-        .modal-scroll::-webkit-scrollbar-thumb {
-            background: rgba(212, 175, 55, 0.4);
-            border-radius: 3px;
-        }
     </style>
 </head>
-<body class="flex flex-col justify-between items-center px-3 py-2 sm:px-6 sm:py-4 h-full max-w-2xl mx-auto select-none">
+<body class="flex flex-col items-center justify-between p-2 sm:p-4 h-screen overflow-hidden">
 
-    <!-- 1. ヘッダー (高さ最小化) -->
-    <header class="w-full flex items-center justify-between glass-panel p-2.5 sm:p-3.5 rounded-2xl shrink-0">
+    <!-- ヘッダー -->
+    <header class="w-full max-w-xl flex items-center justify-between glass-panel p-2.5 sm:p-3 rounded-xl shrink-0">
         <div class="flex items-center gap-2.5">
-            <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-amber-400 to-amber-700 flex items-center justify-center text-slate-950 font-bold text-lg sm:text-xl shadow-md">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-amber-400 to-amber-700 flex items-center justify-center text-slate-950 font-bold text-base sm:text-lg shadow">
                 <i class="fa-solid fa-chess-king"></i>
             </div>
             <div>
-                <h1 class="font-cinzel text-base sm:text-xl font-bold tracking-wider text-amber-400 leading-tight">KING'S VALLEY</h1>
-                <p class="text-[10px] sm:text-xs text-slate-400">王家の谷をめぐるアブストラクト戦略戦</p>
+                <h1 class="font-cinzel text-base sm:text-xl font-bold tracking-wider text-amber-400 leading-none">KING'S VALLEY</h1>
+                <p class="text-[10px] sm:text-xs text-slate-400 mt-0.5">王家の谷をめぐるアブストラクト戦術戦</p>
             </div>
         </div>
-        <div class="flex gap-2">
-            <button id="soundToggleBtn" class="btn-dark w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-slate-300 text-xs sm:text-base" title="サウンド ON/OFF">
+        <div class="flex gap-1.5">
+            <button id="soundToggleBtn" class="btn-dark w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center text-slate-300 text-xs sm:text-sm" title="効果音 ON/OFF">
                 <i class="fa-solid fa-volume-high" id="soundIcon"></i>
             </button>
-            <button id="rulesBtn" class="btn-dark px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl flex items-center gap-1.5 text-xs text-amber-300 font-medium">
-                <i class="fa-solid fa-book-open"></i> <span>ルール</span>
+            <button id="rulesBtn" class="btn-dark px-2.5 py-1.5 rounded-lg flex items-center gap-1 text-xs text-amber-300 font-medium">
+                <i class="fa-solid fa-book-open"></i> ルール
             </button>
         </div>
     </header>
 
-    <!-- 2. 設定 & ステータスパネル (コンパクト配置) -->
-    <section class="w-full glass-panel rounded-2xl p-2.5 sm:p-3.5 flex flex-col gap-2 shrink-0 my-1.5">
-        <!-- 設定セレクター -->
-        <div class="grid grid-cols-3 gap-1.5 text-xs">
-            <!-- モード -->
-            <div class="flex flex-col gap-0.5">
-                <label class="text-slate-400 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider">対戦モード</label>
-                <select id="modeSelect" class="bg-slate-900/90 border border-amber-500/30 rounded-lg px-1.5 py-1 text-amber-200 focus:outline-none text-[11px] sm:text-xs">
-                    <option value="pvp">2人対戦 (1台)</option>
-                    <option value="ai" selected>AI対戦</option>
-                </select>
-            </div>
+    <!-- メインコンテンツ -->
+    <main class="w-full max-w-xl flex flex-col items-center justify-center gap-2 sm:gap-3 my-auto flex-1 py-1">
 
-            <!-- AI 難易度 -->
-            <div class="flex flex-col gap-0.5" id="aiDifficultyContainer">
-                <label class="text-slate-400 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider">AI 難易度</label>
-                <select id="difficultySelect" class="bg-slate-900/90 border border-amber-500/30 rounded-lg px-1.5 py-1 text-amber-200 focus:outline-none text-[11px] sm:text-xs">
-                    <option value="easy">Easy</option>
-                    <option value="normal" selected>Normal</option>
-                    <option value="hard">Hard</option>
-                    <option value="impossible">Impossible</option>
-                </select>
-            </div>
-
-            <!-- ルール選択 -->
-            <div class="flex flex-col gap-0.5">
-                <label class="text-slate-400 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider">ルール設定</label>
-                <select id="ruleSelect" class="bg-slate-900/90 border border-amber-500/30 rounded-lg px-1.5 py-1 text-amber-200 focus:outline-none text-[11px] sm:text-xs">
-                    <option value="standard" selected>スタンダード</option>
-                    <option value="rescue">王の奪還</option>
-                    <option value="simple">簡易版 (Simple)</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- ターン表示 & 操作ボタン -->
-        <div class="flex items-center justify-between pt-1.5 border-t border-slate-700/50">
-            <div class="flex items-center gap-1.5">
-                <div id="turnBadge" class="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-bold flex items-center gap-1.5 transition-colors">
-                    <span id="turnIndicatorDot" class="w-2 h-2 rounded-full animate-pulse"></span>
-                    <span id="turnText">Player 1 の番</span>
+        <!-- 設定 & ステータスバー -->
+        <div class="w-full glass-panel rounded-xl p-2.5 sm:p-3 flex flex-col gap-2 shrink-0">
+            <!-- 設定選択 (モード・難易度・ルール) -->
+            <div class="grid grid-cols-3 gap-1.5 text-xs">
+                <!-- 対戦モード -->
+                <div class="flex flex-col gap-0.5">
+                    <label class="text-slate-400 text-[10px] font-semibold uppercase tracking-wider">対戦</label>
+                    <select id="modeSelect" class="bg-slate-900/90 border border-amber-500/30 rounded px-1.5 py-1 text-amber-200 focus:outline-none focus:border-amber-400 text-xs">
+                        <option value="pvp">2人対戦</option>
+                        <option value="ai" selected>AI対戦</option>
+                    </select>
                 </div>
-                <span id="firstMoveRestrictionNotice" class="text-[10px] text-amber-400/90 hidden sm:inline-block bg-amber-950/60 border border-amber-600/40 px-1.5 py-0.5 rounded">
-                    初手は家臣駒のみ
-                </span>
+
+                <!-- AI 難易度 -->
+                <div class="flex flex-col gap-0.5" id="aiDifficultyContainer">
+                    <label class="text-slate-400 text-[10px] font-semibold uppercase tracking-wider">難易度</label>
+                    <select id="difficultySelect" class="bg-slate-900/90 border border-amber-500/30 rounded px-1.5 py-1 text-amber-200 focus:outline-none focus:border-amber-400 text-xs">
+                        <option value="easy">Easy</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="hard">Hard</option>
+                        <option value="impossible">最強</option>
+                    </select>
+                </div>
+
+                <!-- ルール選択 -->
+                <div class="flex flex-col gap-0.5">
+                    <label class="text-slate-400 text-[10px] font-semibold uppercase tracking-wider">ルール</label>
+                    <select id="ruleSelect" class="bg-slate-900/90 border border-amber-500/30 rounded px-1.5 py-1 text-amber-200 focus:outline-none focus:border-amber-400 text-xs">
+                        <option value="standard" selected>スタンダード</option>
+                        <option value="rescue">王の奪還</option>
+                        <option value="simple">簡易版</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="flex items-center gap-1.5">
-                <button id="undoBtn" class="btn-dark px-2.5 py-1 rounded-lg text-xs text-slate-300 flex items-center gap-1 disabled:opacity-40 disabled:cursor-not-allowed">
-                    <i class="fa-solid fa-rotate-left"></i> 待った
-                </button>
-                <button id="restartBtn" class="btn-gold px-2.5 py-1 rounded-lg text-xs flex items-center gap-1">
-                    <i class="fa-solid fa-arrows-rotate"></i> 再戦
-                </button>
+            <!-- ターン表示 & 情報 -->
+            <div class="flex items-center justify-between pt-1.5 border-t border-slate-700/50">
+                <div class="flex items-center gap-1.5">
+                    <div id="turnBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold flex items-center gap-1.5 transition-colors">
+                        <span id="turnIndicatorDot" class="w-2 h-2 rounded-full animate-pulse"></span>
+                        <span id="turnText">Player 1 の番</span>
+                    </div>
+                    <span id="firstMoveRestrictionNotice" class="text-[10px] text-amber-400/90 bg-amber-950/60 border border-amber-600/40 px-1.5 py-0.5 rounded">
+                        初手家臣限定
+                    </span>
+                </div>
+
+                <!-- アクションボタン -->
+                <div class="flex items-center gap-1.5">
+                    <button id="undoBtn" class="btn-dark px-2 py-1 rounded text-xs text-slate-300 flex items-center gap-1 disabled:opacity-40 disabled:cursor-not-allowed">
+                        <i class="fa-solid fa-rotate-left"></i> 待った
+                    </button>
+                    <button id="restartBtn" class="btn-gold px-2 py-1 rounded text-xs flex items-center gap-1">
+                        <i class="fa-solid fa-arrows-rotate"></i> リセット
+                    </button>
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- 3. ゲーム盤面 (画面の中央にピッタリ配置) -->
-    <main class="w-full flex items-center justify-center my-auto flex-1 py-1">
-        <div class="board-container">
+        <!-- ボード表示エリア -->
+        <div class="board-container relative flex items-center justify-center my-auto">
             <div id="board" class="board-grid w-full h-full">
-                <!-- JSで25マス動的生成 -->
+                <!-- JSで25マスのタイルを動的に生成 -->
             </div>
         </div>
+
     </main>
 
-    <!-- 4. フッター (コンパクト) -->
-    <footer class="w-full text-center py-1 text-[10px] sm:text-xs text-slate-500 shrink-0">
+    <!-- フッター -->
+    <footer class="w-full max-w-xl text-center py-1 text-[10px] text-slate-500 shrink-0">
         <p>King's Valley Game Concept © Mitsuo Yamamoto & Gift Box Co.,Ltd.</p>
     </footer>
 
     <!-- ルール説明モーダル -->
     <div id="rulesModal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-3 hidden backdrop-blur-sm">
-        <div class="glass-modal max-w-lg w-full max-h-[88vh] rounded-2xl p-4 sm:p-5 flex flex-col gap-3 border border-amber-500/30">
+        <div class="glass-modal max-w-lg w-full max-h-[88vh] rounded-xl p-4 sm:p-5 overflow-y-auto border border-amber-500/30 flex flex-col gap-3">
             <div class="flex items-center justify-between border-b border-slate-700 pb-2">
-                <h2 class="text-base sm:text-lg font-bold font-cinzel text-amber-400 flex items-center gap-2">
-                    <i class="fa-solid fa-scroll"></i> ルール一覧 & 比較
+                <h2 class="text-lg font-bold font-cinzel text-amber-400 flex items-center gap-2">
+                    <i class="fa-solid fa-scroll"></i> ルール一覧
                 </h2>
                 <button id="closeRulesBtn" class="text-slate-400 hover:text-white text-lg p-1">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <div class="modal-scroll overflow-y-auto space-y-3 text-xs text-slate-300 pr-1">
-                <!-- 簡易版ルール（注目の新ルール） -->
-                <section class="bg-amber-950/40 p-3 rounded-xl border border-amber-500/40">
+            <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
+                <!-- 簡易版ルール説明（新規追加） -->
+                <section class="bg-amber-950/40 p-3 rounded-lg border border-amber-500/40">
                     <h3 class="text-amber-300 font-bold mb-1 flex items-center gap-1.5 text-sm">
-                        <i class="fa-solid fa-star"></i> 簡易版 (Simple) ※初心者おすすめ
+                        <i class="fa-solid fa-bolt"></i> 簡易版ルール（おすすめ・初心者向け）
                     </h3>
                     <ul class="list-disc list-inside space-y-1 text-slate-200">
-                        <li><strong>家臣の移動:</strong> <span class="text-amber-300 font-semibold">上下左右の4方向のみ</span>（斜め移動はできません）。</li>
-                        <li><strong>中央タイルの通過・着地:</strong> 家臣駒は盤面中央のタイルを<span class="text-amber-300 font-semibold">通過できます</span>。また、突き当たりで道が塞がっていれば中央タイルに<span class="text-amber-300 font-semibold">留まる（乗る）ことも可能</span>です。</li>
-                        <li><strong>勝利条件:</strong> <span class="text-amber-300 font-semibold">どちらかの王様駒が中央のタイルに乗ったときのみ</span>勝利となります（家臣駒が中央に乗ってもゲームは終了しません）。</li>
+                        <li><strong>王様の初手移動:</strong> 1手目から王様を動かすことができます。</li>
+                        <li><strong>家臣の移動方向:</strong> <span class="text-amber-300 font-semibold">上下左右のみ</span>移動可能です（斜め移動はできません）。※王様は全8方向に移動可能。</li>
+                        <li><strong>中央タイルの通行:</strong> 家臣駒は中央タイルを通過でき、障害物（盤の端や他駒）で直進が止まる場合は中央タイル上にとどまることもできます。</li>
+                        <li><strong>勝利条件:</strong> <span class="text-amber-300 font-semibold">どちらかの王様が中央タイルに乗ったときのみ</span>ゲーム終了です（家臣が中央に乗ってもゲームは続きます）。</li>
                     </ul>
                 </section>
 
                 <!-- スタンダードルール説明 -->
-                <section class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                <section class="bg-slate-900/60 p-3 rounded-lg border border-slate-800">
                     <h3 class="text-amber-300 font-bold mb-1 flex items-center gap-1.5 text-sm">
                         <i class="fa-solid fa-crown"></i> スタンダードルール
                     </h3>
-                    <ul class="list-disc list-inside space-y-1">
-                        <li><strong>移動方向:</strong> 駒（王・家臣）は<span class="text-amber-300">前後左右・斜めの8方向</span>に移動し、障害物に当たるまで一気に直進します。</li>
-                        <li><strong>中央制限:</strong> <span class="text-amber-300">家臣駒は中央タイルに入ること・通過することができません</span>（王様のみ進入可）。</li>
-                        <li><strong>初手の制限:</strong> 先手（Player 1）の第1手目は必ず家臣駒を動かします。</li>
-                        <li><strong>勝利・決着:</strong> 自分の王を中央に導くか、相手の王の手（合法手）を無くすと勝利。同じ局面が3回現れた場合は3度目の移動を行った側が負けとなります。</li>
+                    <ul class="list-disc list-inside space-y-1 text-slate-300">
+                        <li><strong>勝利条件:</strong> 自分の王様駒を中央タイルに到達させると勝利。</li>
+                        <li><strong>全駒8方向移動:</strong> 駒は障害物に当たるまで一気に直進。</li>
+                        <li><strong>初手の制限:</strong> 先手の第1手目は家臣駒のみ動かせます。</li>
+                        <li><strong>中央制限:</strong> 中央タイルには<span class="text-amber-300">王様駒しか入れません</span>（家臣は進入・通過不可）。</li>
                     </ul>
                 </section>
 
                 <!-- 王の奪還ルール説明 -->
-                <section class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                <section class="bg-slate-900/60 p-3 rounded-lg border border-slate-800">
                     <h3 class="text-amber-300 font-bold mb-1 flex items-center gap-1.5 text-sm">
                         <i class="fa-solid fa-shield-halved"></i> 王の奪還ルール
                     </h3>
-                    <p>スタンダードと基本ロジックは同じですが、<strong class="text-amber-300">自分の王様が相手陣地の中央（敵陣奥深く）からスタート</strong>します。敵陣から王を救出し、中央へ連れ帰る戦略的なモードです。</p>
+                    <p class="mb-1">基本ルールはスタンダードと同じですが、初期配置のみ異なります。</p>
+                    <ul class="list-disc list-inside space-y-1 text-slate-300">
+                        <li>自分の王様が<span class="text-amber-300">相手陣地の中央</span>からスタートします。</li>
+                    </ul>
                 </section>
             </div>
 
-            <button id="confirmRulesBtn" class="btn-gold w-full py-2 rounded-xl font-bold text-xs sm:text-sm mt-1">
-                閉じる (ゲームに戻る)
+            <button id="confirmRulesBtn" class="btn-gold w-full py-2 rounded-lg font-bold text-xs mt-1">
+                理解しました
             </button>
         </div>
     </div>
@@ -345,7 +347,7 @@
             </div>
             <div>
                 <h2 id="winnerText" class="text-xl font-bold font-cinzel text-amber-300">PLAYER 1 WIN!</h2>
-                <p id="winnerReason" class="text-xs text-slate-300 mt-1">王様がKing's Valleyに到達しました！</p>
+                <p id="winnerReason" class="text-xs text-slate-300 mt-1">王様が中央に到達しました！</p>
             </div>
 
             <button id="modalRestartBtn" class="btn-gold w-full py-2.5 rounded-xl font-bold text-xs tracking-wide shadow-lg">
@@ -354,10 +356,10 @@
         </div>
     </div>
 
-    <!-- JavaScript ゲームエンジン & ロジック -->
+    <!-- JavaScript ロジック -->
     <script>
         /**
-         * Web Audio API による効果音生成クラス
+         * Web Audio APIによる効果音ジェネレータ
          */
         class SoundFX {
             constructor() {
@@ -382,17 +384,17 @@
                 osc.type = 'sine';
                 
                 const now = this.ctx.currentTime;
-                osc.frequency.setValueAtTime(200, now);
-                osc.frequency.exponentialRampToValueAtTime(450, now + 0.1);
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.exponentialRampToValueAtTime(400, now + 0.12);
 
-                gain.gain.setValueAtTime(0.12, now);
-                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
 
                 osc.connect(gain);
                 gain.connect(this.ctx.destination);
 
                 osc.start(now);
-                osc.stop(now + 0.1);
+                osc.stop(now + 0.12);
             }
 
             playSelect() {
@@ -405,16 +407,16 @@
                 osc.type = 'triangle';
 
                 const now = this.ctx.currentTime;
-                osc.frequency.setValueAtTime(550, now);
+                osc.frequency.setValueAtTime(520, now);
 
-                gain.gain.setValueAtTime(0.08, now);
-                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.06);
 
                 osc.connect(gain);
                 gain.connect(this.ctx.destination);
 
                 osc.start(now);
-                osc.stop(now + 0.05);
+                osc.stop(now + 0.06);
             }
 
             playWin() {
@@ -430,15 +432,15 @@
                     osc.type = 'triangle';
                     osc.frequency.value = freq;
 
-                    const startTime = now + idx * 0.09;
-                    gain.gain.setValueAtTime(0.18, startTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.35);
+                    const startTime = now + idx * 0.1;
+                    gain.gain.setValueAtTime(0.2, startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.4);
 
                     osc.connect(gain);
                     gain.connect(this.ctx.destination);
 
                     osc.start(startTime);
-                    osc.stop(startTime + 0.35);
+                    osc.stop(startTime + 0.4);
                 });
             }
         }
@@ -446,7 +448,7 @@
         const sfx = new SoundFX();
 
         /**
-         * ゲーム状態・ロジック管理クラス
+         * ゲーム状態・ロジッククラス
          */
         class KingsValleyGame {
             constructor() {
@@ -454,12 +456,12 @@
                 this.centerPos = { r: 2, c: 2 };
                 this.board = Array(5).fill(null).map(() => Array(5).fill(null));
                 
-                this.turn = 1; // 1: Player 1, 2: Player 2
+                this.turn = 1;
                 this.moveCount = 0;
                 this.selectedPiece = null;
                 this.validMoves = [];
                 
-                this.mode = 'ai'; // 'pvp' or 'ai'
+                this.mode = 'ai';
                 this.difficulty = 'normal';
                 this.rule = 'standard'; // 'standard', 'rescue', 'simple'
                 
@@ -468,12 +470,13 @@
                 this.gameOver = false;
 
                 // 8方向ベクトル
-                this.dirs8 = [
+                this.directions8 = [
                     { r: -1, c: 0 }, { r: 1, c: 0 }, { r: 0, c: -1 }, { r: 0, c: 1 },
                     { r: -1, c: -1 }, { r: -1, c: 1 }, { r: 1, c: -1 }, { r: 1, c: 1 }
                 ];
-                // 4方向ベクトル (上下左右のみ)
-                this.dirs4 = [
+
+                // 4方向ベクトル（上下左右）
+                this.directions4 = [
                     { r: -1, c: 0 }, { r: 1, c: 0 }, { r: 0, c: -1 }, { r: 0, c: 1 }
                 ];
             }
@@ -507,7 +510,7 @@
                     this.board[0][3] = { player: 2, type: 'minion' };
                     this.board[0][4] = { player: 2, type: 'minion' };
                 } else {
-                    // スタンダード & 簡易版: 自陣の中央に自分の王
+                    // スタンダード / 簡易版: 自陣の中央に自分の王
                     this.board[4][0] = { player: 1, type: 'minion' };
                     this.board[4][1] = { player: 1, type: 'minion' };
                     this.board[4][2] = { player: 1, type: 'king' };
@@ -540,7 +543,7 @@
                 return this.positionHistory[key];
             }
 
-            // スライド移動計算
+            // スライド移動可能な最終目的地を計算
             calculateSlideDestination(fromR, fromC, dirR, dirC, piece, boardState = this.board) {
                 let currR = fromR;
                 let currC = fromC;
@@ -549,20 +552,20 @@
                     const nextR = currR + dirR;
                     const nextC = currC + dirC;
 
-                    // 1. 盤外チェック
+                    // 1. 盤外判定
                     if (nextR < 0 || nextR >= 5 || nextC < 0 || nextC >= 5) {
                         break;
                     }
 
-                    // 2. 中央 King's Valley (2,2) 判定
+                    // 2. King's Valley (2,2) 進入制限（簡易版では家臣も入ることができる）
                     if (nextR === 2 && nextC === 2) {
-                        if (piece.type === 'minion' && this.rule !== 'simple') {
-                            // スタンダード/奪還ルールでは家臣駒は中央に入れない・通過できない
+                        if (this.rule !== 'simple' && piece.type === 'minion') {
+                            // スタンダード/奪還ルールでは家臣駒は中央に入れない・通過不可
                             break;
                         }
                     }
 
-                    // 3. 他の駒との衝突
+                    // 3. 他の駒との衝突判定
                     if (boardState[nextR][nextC] !== null) {
                         break;
                     }
@@ -575,24 +578,25 @@
                 return { r: currR, c: currC };
             }
 
-            // 特定駒の合法手取得
+            // 特定の駒のすべての合法手を取得
             getLegalMovesForPiece(r, c, boardState = this.board, moveCount = this.moveCount, currentTurn = this.turn) {
                 const piece = boardState[r][c];
                 if (!piece || piece.player !== currentTurn) return [];
 
-                // 先手初手は王様移動不可ルール
-                if (moveCount === 0 && piece.type === 'king') {
+                // 初手制限: スタンダード/奪還ルールでは先手第1手目の王様移動は禁止（簡易版では許可）
+                if (this.rule !== 'simple' && moveCount === 0 && piece.type === 'king') {
                     return [];
                 }
 
-                // 簡易版では家臣は上下左右のみ、それ以外は8方向
-                let activeDirs = this.dirs8;
+                // 移動可能な方向の選定
+                // 簡易版の場合: 家臣は上下左右の4方向、王は8方向。スタンダード/奪還: 全駒8方向
+                let availableDirections = this.directions8;
                 if (this.rule === 'simple' && piece.type === 'minion') {
-                    activeDirs = this.dirs4;
+                    availableDirections = this.directions4;
                 }
 
                 const moves = [];
-                for (const dir of activeDirs) {
+                for (const dir of availableDirections) {
                     const dest = this.calculateSlideDestination(r, c, dir.r, dir.c, piece, boardState);
                     if (dest) {
                         moves.push(dest);
@@ -601,7 +605,7 @@
                 return moves;
             }
 
-            // 全体の合法手取得
+            // プレイヤー全員の合法手を取得
             getAllLegalMoves(player = this.turn, boardState = this.board, moveCount = this.moveCount) {
                 const allMoves = [];
                 for (let r = 0; r < 5; r++) {
@@ -622,11 +626,11 @@
                 return allMoves;
             }
 
-            // 移動実行
+            // 駒の移動実行
             executeMove(from, to) {
                 if (this.gameOver) return false;
 
-                // 履歴記録（待った用）
+                // 履歴保存（待った用）
                 this.history.push({
                     board: JSON.parse(JSON.stringify(this.board)),
                     turn: this.turn,
@@ -642,7 +646,7 @@
                 this.validMoves = [];
                 this.moveCount++;
 
-                // 1. 勝利判定（王様が中央到達）
+                // 勝利/判定チェック
                 const winResult = this.checkWinCondition(to, piece);
                 if (winResult) {
                     this.gameOver = true;
@@ -652,35 +656,32 @@
                 // ターン交代
                 this.turn = this.turn === 1 ? 2 : 1;
 
-                // 2. 簡易版ルール以外のみの終了チェック（千日手・詰み判定）
-                if (this.rule !== 'simple') {
-                    // 千日手チェック
-                    const repCount = this.recordPosition();
-                    if (repCount >= 3) {
-                        this.gameOver = true;
-                        const loser = this.turn === 1 ? 2 : 1;
-                        const winner = loser === 1 ? 2 : 1;
-                        return { winner, reason: '同一場面3回出現（千日手反復側負け）' };
-                    }
+                // 千日手チェック
+                const repCount = this.recordPosition();
+                if (repCount >= 3) {
+                    this.gameOver = true;
+                    const loser = this.turn === 1 ? 2 : 1;
+                    const winner = loser === 1 ? 2 : 1;
+                    return { winner, reason: '同一場面3回出現（千日手により反復側負け）' };
+                }
 
-                    // 合法手なし（詰み）チェック
-                    const nextPlayerMoves = this.getAllLegalMoves(this.turn);
-                    if (nextPlayerMoves.length === 0) {
-                        this.gameOver = true;
-                        const winner = this.turn === 1 ? 2 : 1;
-                        return { winner, reason: '相手の王に動かせる手が存在しません（詰み）' };
-                    }
+                // 王様詰み・合法手なし判定
+                const nextPlayerMoves = this.getAllLegalMoves(this.turn);
+                if (nextPlayerMoves.length === 0) {
+                    this.gameOver = true;
+                    const winner = this.turn === 1 ? 2 : 1;
+                    return { winner, reason: '相手の駒に合法手が存在しません（詰み）' };
                 }
 
                 return null;
             }
 
             checkWinCondition(lastTo, lastPiece) {
-                // どちらかの王様駒が中央 (2,2) に乗ったときのみ勝利判定
+                // スタンダード/奪還/簡易版共通: 王様が中央 (2,2) に到達した時のみ勝ち
                 if (lastPiece.type === 'king' && lastTo.r === 2 && lastTo.c === 2) {
                     return {
                         winner: lastPiece.player,
-                        reason: `Player ${lastPiece.player} の王が中央タイルに到達しました！`
+                        reason: `Player ${lastPiece.player} の王様が中央に到達しました！`
                     };
                 }
                 return null;
@@ -690,6 +691,7 @@
                 if (this.history.length === 0) return false;
 
                 let steps = (this.mode === 'ai' && this.history.length >= 2) ? 2 : 1;
+                
                 let state;
                 for (let i = 0; i < steps; i++) {
                     if (this.history.length > 0) {
@@ -710,7 +712,7 @@
                 return false;
             }
 
-            // AI 思考ロジック
+            // AI 思考アルゴリズム
             getAIMove() {
                 const legalMoves = this.getAllLegalMoves(2);
                 if (legalMoves.length === 0) return null;
@@ -744,7 +746,7 @@
             }
 
             evaluateMove(move) {
-                // 1. AI王が即中央に入れるか
+                // 1. 即時勝利手チェック
                 if (move.piece.type === 'king' && move.to.r === 2 && move.to.c === 2) {
                     return 100000;
                 }
@@ -755,7 +757,7 @@
 
                 let score = 0;
 
-                // 2. 相手(P1)の王が次で中央に入れるか（ブロック優先）
+                // 2. 相手 (Player 1) の王が次手で中央に入れるか防衛チェック
                 const p1Moves = this.getAllLegalMoves(1, tempBoard, this.moveCount + 1);
                 for (const p1Move of p1Moves) {
                     if (p1Move.piece.type === 'king' && p1Move.to.r === 2 && p1Move.to.c === 2) {
@@ -763,19 +765,19 @@
                     }
                 }
 
-                // 3. 王の評価（中央への距離）
+                // 3. 王様の評価
                 if (move.piece.type === 'king') {
                     const distToValley = Math.abs(move.to.r - 2) + Math.abs(move.to.c - 2);
                     score += (8 - distToValley) * 15;
 
                     const kingLegalMoves = this.getLegalMovesForPiece(move.to.r, move.to.c, tempBoard, this.moveCount + 1, 2);
-                    score += kingLegalMoves.length * 4;
+                    score += kingLegalMoves.length * 5;
                 }
 
-                // 4. 家臣の評価
+                // 4. 家臣駒の評価
                 if (move.piece.type === 'minion') {
                     const distToCenter = Math.abs(move.to.r - 2) + Math.abs(move.to.c - 2);
-                    score += (5 - distToCenter) * 6;
+                    score += (5 - distToCenter) * 8;
                 }
 
                 score += Math.random() * 2;
@@ -783,11 +785,11 @@
             }
         }
 
-        // --- UI アプリケーション層 ---
+        // --- UI & イベント処理制御 ---
         document.addEventListener('DOMContentLoaded', () => {
             const game = new KingsValleyGame();
 
-            // Element References
+            // DOM Elements
             const boardEl = document.getElementById('board');
             const modeSelect = document.getElementById('modeSelect');
             const difficultySelect = document.getElementById('difficultySelect');
@@ -897,16 +899,17 @@
                 const isP1 = game.turn === 1;
                 
                 if (isP1) {
-                    turnBadge.className = 'px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-bold flex items-center gap-1.5 bg-amber-500/20 text-amber-300 border border-amber-500/40';
+                    turnBadge.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold flex items-center gap-1.5 bg-amber-500/20 text-amber-300 border border-amber-500/40';
                     turnIndicatorDot.className = 'w-2 h-2 rounded-full bg-amber-400 animate-pulse';
-                    turnText.textContent = 'Player 1 の番';
+                    turnText.textContent = 'Player 1 (Gold) の番';
                 } else {
-                    turnBadge.className = 'px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-bold flex items-center gap-1.5 bg-cyan-500/20 text-cyan-300 border border-cyan-500/40';
+                    turnBadge.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold flex items-center gap-1.5 bg-cyan-500/20 text-cyan-300 border border-cyan-500/40';
                     turnIndicatorDot.className = 'w-2 h-2 rounded-full bg-cyan-400 animate-pulse';
-                    turnText.textContent = game.mode === 'ai' ? 'AI 思考中...' : 'Player 2 の番';
+                    turnText.textContent = game.mode === 'ai' ? 'AI (Blue) 思考中...' : 'Player 2 (Blue) の番';
                 }
 
-                if (game.moveCount === 0 && isP1) {
+                // 初手制約アナウンス（簡易版では表示しない）
+                if (game.rule !== 'simple' && game.moveCount === 0 && isP1) {
                     restrictionNotice.classList.remove('hidden');
                 } else {
                     restrictionNotice.classList.add('hidden');
@@ -921,14 +924,14 @@
 
                 const clickedPiece = game.board[r][c];
 
-                // 目的地選択
+                // 移動先選択
                 const moveDestination = game.validMoves.find(m => m.r === r && m.c === c);
                 if (moveDestination && game.selectedPiece) {
                     executeUserMove(game.selectedPiece, moveDestination);
                     return;
                 }
 
-                // 自駒選択
+                // 駒の選択
                 if (clickedPiece && clickedPiece.player === game.turn) {
                     sfx.playSelect();
                     game.selectedPiece = { r, c };
@@ -954,7 +957,7 @@
                 }
 
                 if (game.mode === 'ai' && game.turn === 2 && !game.gameOver) {
-                    setTimeout(triggerAIMove, 450);
+                    setTimeout(triggerAIMove, 400);
                 }
             }
 
@@ -986,7 +989,7 @@
                 winnerModal.classList.remove('hidden');
             }
 
-            // イベントバインド
+            // イベントリスナー
             modeSelect.addEventListener('change', () => {
                 if (modeSelect.value === 'ai') {
                     aiDiffContainer.classList.remove('hidden');
